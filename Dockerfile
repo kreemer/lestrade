@@ -7,12 +7,14 @@ RUN apk update && apk add --no-cache \
 	vim \
 	libzip-dev \
 	unzip \
-	bash
+	bash \
+	postgresql-dev
 
 RUN docker-php-ext-install zip \
 	&& docker-php-ext-install sockets \
 	&& docker-php-ext-install opcache \
-	&& docker-php-ext-enable opcache
+	&& docker-php-ext-enable opcache \
+	&& docker-php-ext-install pdo pdo_pgsql
 
 COPY . /app
 WORKDIR /app
