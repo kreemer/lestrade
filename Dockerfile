@@ -8,7 +8,8 @@ RUN apk update && apk add --no-cache \
 	libzip-dev \
 	unzip \
 	bash \
-	postgresql-dev
+	postgresql-dev \
+	tzdata
 
 RUN docker-php-ext-install zip \
 	&& docker-php-ext-install sockets \
