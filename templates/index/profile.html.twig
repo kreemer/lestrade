@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Profile</h1>
+    <table class="table">
+        {% for day in days %}
+            <tr>
+                <th>{{ day.date|date('d.m.Y') }}</th>
+                {% for frame in day.frames %}
+                    <td>{{ frame.startAt|date('H:i')}}</td>
+                    <td>{{ frame.endAt|date('H:i')}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <hr />
+    <div class="row">
+        <div class="col-6">
+            <h2>Calendar</h2>
+            <div {{ stimulus_controller('calendar', { api: path('app_user_events'), date: date}) }} style="height: 400px;">
+            </div>
+        </div>
+        <div class="col-6">
+            <h2>Stats</h2>
+            {{ render_chart(chart) }}
+        </div>
+    </div>
+    <hr />
+    <div class="d-flex flex-row justify-content-center">
+        <div class="p-4">
+            <a href="{{ path('app_profile', { date: date|date_modify('-1 week')|date('d-m-Y')}) }}">Previous</a>
+        </div>
+        <div class="p-4">
+            <a href="{{ path('app_profile') }}">Today</a>
+        </div>
+        <div class="p-4">
+            <a href="{{ path('app_profile', { date: date|date_modify('+1 week')|date('d-m-Y')}) }}">Next</a>
+        </div>
+    </div>
+{% endblock %}

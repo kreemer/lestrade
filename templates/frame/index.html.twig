@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Frames</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>StartAt</th>
+                <th>EndAt</th>
+                <th>Tags</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for frame in frames %}
+                <tr>
+                    <td>{{ frame.startAt ? frame.startAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ frame.endAt ? frame.endAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ frame.tags ? frame.tags|join(', ') : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_frame_show', {'id': frame.id}) }}">show</a>
+                        <a href="{{ path('app_frame_edit', {'id': frame.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex flex-row justify-content-end">
+        <div class="p-4">
+            <a href="{{ path('app_frame_new') }}">Create new</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Frame</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ frame.id }}</td>
+            </tr>
+            <tr>
+                <th>StartAt</th>
+                <td>{{ frame.startAt ? frame.startAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndAt</th>
+                <td>{{ frame.endAt ? frame.endAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Tags</th>
+                <td>{{ frame.tags ? frame.tags|join(', ') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex flex-row justify-content-end">
+        <div class="p-4">
+            <a href="{{ path('app_frame_index') }}">back to list</a>
+        </div>
+        <div class="p-4">
+            <a href="{{ path('app_frame_edit', {'id': frame.id}) }}">edit</a>
+        </div>
+        <div class="p-4">{{ include('frame/_delete_form.html.twig') }}</div>
+    </div>
+{% endblock %}
