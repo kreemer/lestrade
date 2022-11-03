@@ -41,7 +41,7 @@ class FrameController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $frameRepository->add($frame, true);
 
-            return $this->redirectToRoute('app_frame_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_frame_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('frame/new.html.twig', [
@@ -71,7 +71,7 @@ class FrameController extends AbstractController
             $frame->setUpdatedAt(new DateTimeImmutable());
             $frameRepository->add($frame, true);
 
-            return $this->redirectToRoute('app_frame_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_frame_show', [ 'id' => $frame->getId() ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('frame/edit.html.twig', [
